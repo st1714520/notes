@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+  repository_dispatch:
+    types: [vault-updated]
   workflow_dispatch:
 
 permissions:
@@ -22,6 +24,12 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Checkout vault content
+        uses: actions/checkout@v4
+        with:
+          repository: st1714520/vault
+          path: content
 
       - name: Setup Node
         uses: actions/setup-node@v4
